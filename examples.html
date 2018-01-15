@@ -8,7 +8,7 @@
 <script type="text/javascript" src="ThreeCSG.js"></script>
 
 <script type="text/javascript">
-var renderer, scene, camera, light;
+var renderer, scene, camera, light, material;
 window.onload = function() {
 
 	renderer = new THREE.WebGLRenderer({antialias: true});
@@ -30,6 +30,11 @@ window.onload = function() {
 	camera.position.set( 5, 5, 15 );
 	camera.lookAt( scene.position );
 	scene.add( camera );
+
+	material = new THREE.MeshLambertMaterial({
+		map: new THREE.TextureLoader().load('texture.png')
+	});
+
 	// Example #1 - Cube (mesh) subtract Sphere (mesh)
 	(function() {
 		console.time("Example 1");
@@ -43,10 +48,7 @@ window.onload = function() {
 		var sphere_bsp = new ThreeBSP( sphere_mesh );
 
 		var subtract_bsp = cube_bsp.subtract( sphere_bsp );
-		var result = subtract_bsp.toMesh( new THREE.MeshLambertMaterial({
-			shading: THREE.SmoothShading,
-			map: new THREE.TextureLoader().load('texture.png')
-		}));
+		var result = subtract_bsp.toMesh(material);
 
 		result.geometry.computeVertexNormals();
 		scene.add( result );
@@ -64,10 +66,7 @@ window.onload = function() {
 
 		var union_bsp = sphere_bsp.union( cube_bsp );
 
-		var result = union_bsp.toMesh( new THREE.MeshLambertMaterial({
-			shading: THREE.SmoothShading,
-			map: new THREE.TextureLoader().load('texture.png')
-		}));
+		var result = union_bsp.toMesh(material);
 
 		result.geometry.computeVertexNormals();
 		scene.add( result );
@@ -88,10 +87,7 @@ window.onload = function() {
 
 		var intersect_bsp = sphere_bsp_1.intersect( sphere_bsp_2 );
 
-		var result = intersect_bsp.toMesh( new THREE.MeshLambertMaterial({
-			shading: THREE.SmoothShading,
-			map: new THREE.TextureLoader().load('texture.png')
-		}));
+		var result = intersect_bsp.toMesh(material);
 
 		result.position.x = 6;
 		result.geometry.computeVertexNormals();
