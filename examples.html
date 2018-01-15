@@ -32,7 +32,7 @@ window.onload = function() {
 	scene.add( camera );
 	// Example #1 - Cube (mesh) subtract Sphere (mesh)
 	(function() {
-		var start_time = (new Date()).getTime();
+		console.time("Example 1");
 		var cube_geometry = new THREE.CubeGeometry( 3, 3, 3 );
 		var cube_mesh = new THREE.Mesh( cube_geometry );
 		cube_mesh.position.x = -7;
@@ -50,10 +50,11 @@ window.onload = function() {
 
 		result.geometry.computeVertexNormals();
 		scene.add( result );
-		console.log( 'Example 1: ' + ((new Date()).getTime() - start_time) + 'ms' );
+		console.timeEnd("Example 1");
 	})();
 	// Example #2 - Sphere (geometry) union Cube (geometry)
 	(function() {
+		console.time("Example 2");
 		var start_time = (new Date()).getTime();
 		var sphere_geometry = new THREE.SphereGeometry( 2, 16, 16 );
 		var sphere_bsp = new ThreeBSP( sphere_geometry );
@@ -70,13 +71,13 @@ window.onload = function() {
 
 		result.geometry.computeVertexNormals();
 		scene.add( result );
-		console.log( 'Example 2: ' + ((new Date()).getTime() - start_time) + 'ms' );
+		console.timeEnd("Example 2");
 	})();
 
 
 	// Example #3 - Sphere (geometry) intersect Sphere (mesh)
 	(function() {
-		var start_time = (new Date()).getTime();
+		console.time("Example 3");
 		var sphere_geometry_1 = new THREE.SphereGeometry( 2, 64, 8 );
 		var sphere_bsp_1 = new ThreeBSP( sphere_geometry_1 );
 
@@ -95,7 +96,7 @@ window.onload = function() {
 		result.position.x = 6;
 		result.geometry.computeVertexNormals();
 		scene.add( result );
-		console.log( 'Example 3: ' + ((new Date()).getTime() - start_time) + 'ms' );
+		console.timeEnd("Example 3");
 	})();
 	(function render() {
 		requestAnimationFrame( render );
