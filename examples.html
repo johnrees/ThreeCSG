@@ -54,6 +54,7 @@ window.onload = function() {
 		scene.add( result );
 		console.timeEnd("Example 1");
 	})();
+
 	// Example #2 - Sphere (geometry) union Cube (geometry)
 	(function() {
 		console.time("Example 2");
@@ -73,7 +74,6 @@ window.onload = function() {
 		console.timeEnd("Example 2");
 	})();
 
-
 	// Example #3 - Sphere (geometry) intersect Sphere (mesh)
 	(function() {
 		console.time("Example 3");
@@ -90,10 +90,12 @@ window.onload = function() {
 		var result = intersect_bsp.toMesh(material);
 
 		result.position.x = 6;
+
 		result.geometry.computeVertexNormals();
 		scene.add( result );
 		console.timeEnd("Example 3");
 	})();
+
 	(function render() {
 		requestAnimationFrame( render );
 		renderer.render(scene, camera);
